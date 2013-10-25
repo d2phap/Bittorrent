@@ -30,7 +30,7 @@ public class ThreadDownloadChunk extends Thread {
     public boolean startDownload() {
         try {
             String tenChunk = file.getTenfile() + "_" + thuTuChunk;
-
+            
             // if we have no listeners, do nothing...
             if (listeners != null && !listeners.isEmpty()) {
                 // make a copy of the listener list in case
@@ -53,8 +53,15 @@ public class ThreadDownloadChunk extends Thread {
 
 
                 for (int i = 0; i < peer.countListPeer(); i++) {
-
                     try {
+                        
+                        //1. Lap danh sach chunk trong tung peer
+                        ////////////////////////////////////
+                        //2. SELECT trong PEER chua chunk
+                        //   Chon PEER co COUNT(thread) nho nhat
+                        //   lam PEER download 
+                        
+                        
                         String _ip = peer.getPeerItem(i).getIpAddresss().toString();
                         
                         

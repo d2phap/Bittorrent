@@ -4,6 +4,11 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Enumeration;
+import java.util.Hashtable;
+import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,6 +39,15 @@ public class Bittorent extends javax.swing.JFrame {
     public static File f;
     private ThreadDownloadTorrent dlTorrent;
     private int isPause = 0;
+    
+    /**
+     * Thực hiện điều phối download các chunk theo nguyên lý chuồng bồ câu
+     * [IP | chunk_id, chunk_id, chunk_id, ...]
+     * [IP | chunk_id, chunk_id, chunk_id, ...]
+     * [IP | chunk_id, chunk_id, chunk_id, ...]
+     */
+    public static Dictionary<String, List<Integer>> chuongBoCau = new Hashtable<>();
+    public static Dictionary<String, List<Integer>> viTriChunk = new Hashtable<>();
 
     public Bittorent() {
 
@@ -377,8 +391,9 @@ public class Bittorent extends javax.swing.JFrame {
      */
     private void btnTaiTatCaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaiTatCaActionPerformed
         // TODO add your handling code here:
-
+        
         File torrentFile = new File(txtTaiTorrent.getText().trim());
+        String tenFile = torrentFile.getName().substring(0, torrentFile.getName().lastIndexOf(".torrent"));
         
         if (!torrentFile.exists()) {
             //Tap tin ko ton tai
@@ -414,6 +429,7 @@ public class Bittorent extends javax.swing.JFrame {
                 return;
             }
             
+            Bittorent.chuongBoCau = new Hashtable<>();
             dlTorrent = new ThreadDownloadTorrent();
             dlTorrent.torrentFile = torrentFile;
             dlTorrent.peer = peer;

@@ -102,12 +102,16 @@ public class ThreadDownloadTorrent extends Thread implements EventListener {
             return;
         }
 
-        String ten = torrentFile.getName();
-        ten = ten.replaceAll(".torrent", "");
+        String ten = torrentFile.getName().substring(0, torrentFile.getName().lastIndexOf(".torrent"));
 
         final ThongTinTapTin fi = new ThongTinTapTin();
         fi.setTenfile(ten);
         fi.setSochunk(sochunk);
+        
+        
+        //SendRequest gui = new SendRequest();
+        //gui.peer = Bittorent.peer;
+        //gui.kiemTraFileChunk(ten, sochunk);
 
         // if we have no listeners, do nothing...
         if (listeners != null && !listeners.isEmpty()) {
@@ -133,7 +137,7 @@ public class ThreadDownloadTorrent extends Thread implements EventListener {
             //Nham quan ly viec tam dung download
             listThreadDownload = new ArrayList<>();
             
-            //Lan luot tap thread de tai cac chunk dong thoi
+            //Lan luot tao thread de tai cac chunk dong thoi
             for (int i = 0; i < sochunk; i++) {
                 
                 File f = new File(ThongTinChunk.duongDanChunk + ten + "/" + ten + "_" + (i + 1 + ".chunk"));

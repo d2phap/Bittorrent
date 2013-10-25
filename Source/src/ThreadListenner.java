@@ -1,7 +1,9 @@
 
+import java.io.File;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.net.Inet4Address;
 import java.net.SocketException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -60,7 +62,39 @@ public class ThreadListenner extends Thread {
                         } catch (IOException ex) {
                             Logger.getLogger(SendRequest.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                    } 
+                    }
+                    //Lay danh sach chunk
+                    else if(yc.contains("GET_CHUNK=>"))
+                    {
+                        //Lay ten file can kiem tra so luong chunk
+                        String tenFile = yc.split("=>")[1];
+                        int soLuongChunkToiDa = Integer.parseInt(yc.split("=>")[2]);
+                        String chuoiKQ = Inet4Address.getLocalHost().getHostAddress() + "=>";
+                        
+                        
+                        //Kiem tra su ton tai cua file chunk
+                        for (int i = 1; i <= soLuongChunkToiDa; i++) 
+                        {
+                            File fchunk = new File("./Chunk/" + tenFile + "/" + tenFile + "_" + i + ".chunk");
+                            if(fchunk.exists())
+                            {
+                                //Neu ton tai thi them vao danh sach
+                                chuoiKQ += i + ",";
+                            }
+                        }
+                        
+                        //Gui lai kq
+                        sendPacket = new DatagramPacket(chuoiKQ.getBytes(), chuoiKQ.getBytes().length,
+                                rcvPacket.getAddress(), rcvPacket.getPort());
+                        
+                        try {
+                            socket.send(sendPacket);
+                            
+                        } catch (IOException ex) {
+                            Logger.getLogger(SendRequest.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        
+                    }
                     //Neu nhan duoc tin hieu yeu cau Down file
                     else if (yc.compareTo("Down_File") == 0) {
                         ThreadSendChunk send = new ThreadSendChunk();
