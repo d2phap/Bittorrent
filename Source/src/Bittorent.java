@@ -459,12 +459,12 @@ public class Bittorent extends javax.swing.JFrame {
         // TODO add your handling code here:
         JFileChooser fc = new JFileChooser();
         fc.setMultiSelectionEnabled(false);// không cho chọn nhiều file
+        fc.setCurrentDirectory(new File("./torrent"));
         fc.setFileFilter(new FileNameExtensionFilter("Torrent file (*.torrent)", "torrent"));
 
         if(fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION)
         {
             txtNoiFile.setText(fc.getSelectedFile().getAbsolutePath());
-            LogFile.Write("@Nối tập tin: Mở tập tin " + fc.getSelectedFile().getAbsolutePath());
         }
     }//GEN-LAST:event_btnChonFileNoiActionPerformed
 
@@ -478,11 +478,11 @@ public class Bittorent extends javax.swing.JFrame {
         JFileChooser fc = new JFileChooser();
         fc.setFileFilter(new FileNameExtensionFilter("Torrent file (*.torrent)", "torrent"));
         fc.setMultiSelectionEnabled(false);
+        fc.setCurrentDirectory(new File("./torrent"));
 
         if (fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             if (fc.getSelectedFile() != null) {
                 txtTaiTorrent.setText(fc.getSelectedFile().getAbsolutePath());
-                LogFile.Write("@Tải torrent: Mở tập tin " + fc.getSelectedFile().getAbsolutePath());
 
                 FileInputStream fis = null;
                 f = fc.getSelectedFile(); // chọn file cần startDownload
@@ -526,7 +526,6 @@ public class Bittorent extends javax.swing.JFrame {
         if(fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION)
         {
             txtCatTapTin.setText(fc.getSelectedFile().getAbsolutePath());
-            LogFile.Write("@Cắt tập tin: Mở tập tin " + fc.getSelectedFile().getAbsolutePath());
         }
     }//GEN-LAST:event_btnChonCatTapTinActionPerformed
 

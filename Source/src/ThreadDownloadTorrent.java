@@ -109,7 +109,6 @@ public class ThreadDownloadTorrent extends Thread implements EventListener {
         fi.setTenfile(ten);
         fi.setSochunk(sochunk);
 
-        LogFile.Write("Kiểm tra có tạo CustomEventListener chưa?");
         // if we have no listeners, do nothing...
         if (listeners != null && !listeners.isEmpty()) {
             // make a copy of the listener list in case
@@ -121,7 +120,6 @@ public class ThreadDownloadTorrent extends Thread implements EventListener {
             // create the event object to send
             final CustomEventObject event = new CustomEventObject(0, sochunk);
             event._object1 = ten; //Lưu tên tập tin
-            LogFile.Write("Đã tạo CustomEventListener. Tạo CustomEventObject");
             
 
             //Phát sinh sự kiện START

@@ -10,11 +10,11 @@
 public class ThongTinChunk {
     public static String duongDanChunk = "Chunk/"; // mặc định đường dẫn Chunk
     public static String duongDanLuuFileGhep = "ghepfile/"; // mặc định file được ghép lưu vào 
-    private TrangThaiChunk[] chunkState;
+    //private TrangThaiChunk[] chunkState;
     
     /**
      * Lưu trạng thái khi dowload
-     */
+     *
     public static enum TrangThaiChunk {
         DEFAULT,
         DOWNLOADING,
@@ -31,7 +31,7 @@ public class ThongTinChunk {
      * 
      * @param index
      * @param newState 
-     */
+     *
     public void setTrangThai(int index, TrangThaiChunk newState)
     {
         chunkState[index] = newState;
@@ -40,7 +40,7 @@ public class ThongTinChunk {
     /**
      * 
      * @param chunkCount 
-     */
+     *
     public ThongTinChunk(int chunkCount)
     {
         chunkState = new TrangThaiChunk[chunkCount];
@@ -50,5 +50,5 @@ public class ThongTinChunk {
     
     public int getSoLuongChunk() {
         return chunkState.length;
-    }
+    }*/
 }
