@@ -50,18 +50,25 @@ public class LogFile {
         return false;
     }
     
+    public static void Write(String text) 
+    {
+        String thoigian = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(Calendar.getInstance().getTime());
+        thoigian += " > ";
+        thoigian += text + "\r\n";
+        
+        //Them vao log
+        Bittorent.logString += thoigian;
+    }
+    
     /**
      * Ghi file log
      * @param text nội dung cần ghi
      */
-    public static void Write(String text) 
+    public static void WriteToFile(String text) 
     {
         File f = new File(_filename);
         
         try {
-            
-            String thoigian = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(Calendar.getInstance().getTime());
-            thoigian += " > ";
             
             //Đọc tất cả nội dung của file log
             List _dsLines = new ArrayList();
@@ -75,7 +82,7 @@ public class LogFile {
                 }
                 reader.close();
             }
-            _dsLines.add(0, thoigian + text);
+            _dsLines.add(text);
             String kq = "";
             
             //Ghi nội dung file log

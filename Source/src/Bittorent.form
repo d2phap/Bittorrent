@@ -49,7 +49,7 @@
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="102" attributes="0">
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="167" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="163" max="-2" attributes="0"/>
                           <Component id="btnThongTin" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -289,6 +289,8 @@
                           <Component id="lblStatus" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
+                      <Component id="btnXemLog" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -296,9 +298,14 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace pref="18" max="32767" attributes="0"/>
-                      <Component id="lblStatus" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="progStatus" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="btnXemLog" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="lblStatus" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="progStatus" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -311,6 +318,14 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JProgressBar" name="progStatus">
+            </Component>
+            <Component class="javax.swing.JButton" name="btnXemLog">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Xem log"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnXemLogActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

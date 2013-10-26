@@ -43,6 +43,7 @@ public class Bittorent extends javax.swing.JFrame {
      * Danh sách lưu thông tin các peer
      */
     public static ArrayList<PeerInfo> danhSachPeer = new ArrayList<>();
+    public static String logString = "";
     
 
     public Bittorent() {
@@ -120,6 +121,7 @@ public class Bittorent extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         lblStatus = new javax.swing.JLabel();
         progStatus = new javax.swing.JProgressBar();
+        btnXemLog = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Torrent downloader");
@@ -217,6 +219,13 @@ public class Bittorent extends javax.swing.JFrame {
 
         lblStatus.setText("##");
 
+        btnXemLog.setText("Xem log");
+        btnXemLog.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXemLogActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -226,15 +235,20 @@ public class Bittorent extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(progStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblStatus))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnXemLog)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(18, Short.MAX_VALUE)
-                .addComponent(lblStatus)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(progStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnXemLog)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblStatus)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(progStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -247,7 +261,7 @@ public class Bittorent extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(167, 167, 167)
+                        .addGap(163, 163, 163)
                         .addComponent(btnThongTin))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(btnNoiTapTin, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -335,6 +349,7 @@ public class Bittorent extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
         LogFile.Write("#END_PROGRAM-------------------------------------------------------");
+        LogFile.WriteToFile(Bittorent.logString);
     }//GEN-LAST:event_formWindowClosing
 
     private void btnThongTinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongTinActionPerformed
@@ -662,6 +677,12 @@ public class Bittorent extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnCatTapTinActionPerformed
 
+    private void btnXemLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXemLogActionPerformed
+        // TODO add your handling code here:
+        frmLog flog = new frmLog(Bittorent.logString);
+        flog.setVisible(true);
+    }//GEN-LAST:event_btnXemLogActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -704,6 +725,7 @@ public class Bittorent extends javax.swing.JFrame {
     private javax.swing.JButton btnTaiChunkDangChon;
     private javax.swing.JButton btnTaiTatCa;
     private javax.swing.JButton btnThongTin;
+    private javax.swing.JButton btnXemLog;
     private javax.swing.JComboBox cmbChunk;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
