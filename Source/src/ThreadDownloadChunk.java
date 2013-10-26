@@ -109,6 +109,15 @@ public class ThreadDownloadChunk extends Thread {
                                     //Lặp cho đến khi nhận được lệnh isRunning = true
                                 }
 
+                                
+                                //Phát sinh sự kiện OCCUR
+                                e = targets.elements();
+                                event._object1 = tenChunk;
+                                while (e.hasMoreElements()) {
+                                    CustomEventListener l = (CustomEventListener) e.nextElement();
+                                    l.onOccur(event);
+                                }
+                                
                                 if (rc.compareTo("END") != 0) {
                                     
                                     int numbyte = rcvPacket.getData().length;
@@ -133,16 +142,10 @@ public class ThreadDownloadChunk extends Thread {
                             System.arraycopy(data, 0, newData, 0, size);
                             boolean ghi = file.ghichunk(thuTuChunk, newData);
 
-                            //Phát sinh sự kiện OCCUR
-                            e = targets.elements();
-                            while (e.hasMoreElements()) {
-                                CustomEventListener l = (CustomEventListener) e.nextElement();
-                                l.onOccur(event);
-                            }
-
 
                             if (ghi == true) {
                                 //Phát sinh sự kiện FINISH
+                                event._object1 = tenChunk;
                                 e = targets.elements();
                                 while (e.hasMoreElements()) {
                                     CustomEventListener l = (CustomEventListener) e.nextElement();

@@ -13,14 +13,41 @@ import java.util.logging.Logger;
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-public class SendRequest {
+public class ThreadSendRequest extends Thread {
 
     public PeerInfo peer;
     public int port = 100;
     private byte[] buffer;
     private DatagramSocket socket;
     private DatagramPacket sendPacket, rcvPacket;
+    public TenPhuongThuc func = TenPhuongThuc.gui;
+    
+    /**
+     * Sử dụng cho chức năng kiemTraFileChunk
+     */
+    public String tenFile = "";
+    /**
+     * Sử dụng cho chức năng kiemTraFileChunk
+     */
+    public int soChunk = 0;
+    
+    public enum TenPhuongThuc
+    {
+        gui,
+        kiemTraFileChunk
+    }
 
+    public void run() {
+        if(func == TenPhuongThuc.gui)
+        {
+            gui();
+        }
+        else if(func == TenPhuongThuc.kiemTraFileChunk)
+        {
+            kiemTraFileChunk(tenFile, soChunk);
+        }
+    }
+    
     public void gui() {
         try {
 
@@ -43,18 +70,19 @@ public class SendRequest {
                     
                     if (gt != null) {
                         peer.getPeerItem(i).setStatus(true);
+                        LogFile.Write(peer.getPeerItem(i).getIpAddresss() + " ONLINE");
                     }
                     
                 } catch (IOException ex) {
 
-                    Logger.getLogger(SendRequest.class.getName()).log(Level.SEVERE, null, ex);
+                    LogFile.Write(peer.getPeerItem(i).getIpAddresss() + " OFFLINE");
                 }
             }
             
             socket.close();
         } catch (SocketException ex) {
             socket.close();
-            Logger.getLogger(SendRequest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ThreadSendRequest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -134,15 +162,12 @@ public class SendRequest {
                     }
                     
                 } catch (IOException ex) {
-
-                    Logger.getLogger(SendRequest.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             
             socket.close();
         } catch (SocketException ex) {
             socket.close();
-            Logger.getLogger(SendRequest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

@@ -76,15 +76,17 @@ public class LogFile {
                 reader.close();
             }
             _dsLines.add(0, thoigian + text);
-            
+            String kq = "";
             
             //Ghi nội dung file log
             FileWriter writer = new FileWriter(f);
             
             for(int i = 0 ; i< _dsLines.size(); i++)
             {
-                writer.write(_dsLines.get(i).toString() + "\n");
+                kq += _dsLines.get(i).toString() + "\r\n";
             }
+            
+            writer.write(kq);
             writer.flush();
             writer.close();
             

@@ -35,7 +35,7 @@ public class Bittorent extends javax.swing.JFrame {
     public static int portlisten = 1991;
     public static int portdow = 1001;
     public static ThreadListenner nghe;
-    public static SendRequest gui;
+    public static ThreadSendRequest gui;
     public static File f;
     private ThreadDownloadTorrent dlTorrent;
     private int isPause = 0;
@@ -80,9 +80,11 @@ public class Bittorent extends javax.swing.JFrame {
         peer = new PeerInfo();
         nghe = new ThreadListenner();
         nghe.start();
-        gui = new SendRequest();
+        
+        gui = new ThreadSendRequest();
         gui.peer = peer;
-        gui.gui();
+        gui.func = ThreadSendRequest.TenPhuongThuc.gui;
+        gui.start();
 
         initComponents();
         txtCatTapTin.setEditable(false);
@@ -393,7 +395,6 @@ public class Bittorent extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         File torrentFile = new File(txtTaiTorrent.getText().trim());
-        String tenFile = torrentFile.getName().substring(0, torrentFile.getName().lastIndexOf(".torrent"));
         
         if (!torrentFile.exists()) {
             //Tap tin ko ton tai
@@ -440,7 +441,7 @@ public class Bittorent extends javax.swing.JFrame {
                     progStatus.setMaximum(e._max);
                     progStatus.setMinimum(e._min);
                     progStatus.setValue(0);
-                    lblStatus.setText("");
+                    lblStatus.setText("Đang tìm vị trí chunk cần tải...");
                     isPause = 1;
                     btnTaiTatCa.setText("Tạm dừng");
                 }

@@ -60,7 +60,7 @@ public class ThreadListenner extends Thread {
                         try {
                             socket.send(sendPacket);
                         } catch (IOException ex) {
-                            Logger.getLogger(SendRequest.class.getName()).log(Level.SEVERE, null, ex);
+                            Logger.getLogger(ThreadSendRequest.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
                     //Lay danh sach chunk
@@ -91,7 +91,7 @@ public class ThreadListenner extends Thread {
                             socket.send(sendPacket);
                             
                         } catch (IOException ex) {
-                            Logger.getLogger(SendRequest.class.getName()).log(Level.SEVERE, null, ex);
+                            Logger.getLogger(ThreadSendRequest.class.getName()).log(Level.SEVERE, null, ex);
                         }
                         
                     }

@@ -107,11 +107,6 @@ public class ThreadDownloadTorrent extends Thread implements EventListener {
         final ThongTinTapTin fi = new ThongTinTapTin();
         fi.setTenfile(ten);
         fi.setSochunk(sochunk);
-        
-        
-        //SendRequest gui = new SendRequest();
-        //gui.peer = Bittorent.peer;
-        //gui.kiemTraFileChunk(ten, sochunk);
 
         // if we have no listeners, do nothing...
         if (listeners != null && !listeners.isEmpty()) {
@@ -131,6 +126,20 @@ public class ThreadDownloadTorrent extends Thread implements EventListener {
             while (e.hasMoreElements()) {
                 CustomEventListener l = (CustomEventListener) e.nextElement();
                 l.onStart(event);
+            }
+            
+            //Gui broadcast tim kiem vi tri chunk
+            ThreadSendRequest gui = new ThreadSendRequest();
+            gui.peer = Bittorent.peer;
+            gui.func = ThreadSendRequest.TenPhuongThuc.kiemTraFileChunk;
+            gui.tenFile = ten;
+            gui.soChunk = sochunk;
+            gui.start();
+            
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(ThreadDownloadTorrent.class.getName()).log(Level.SEVERE, null, ex);
             }
             
             //Danh sach cac thread download chunk
@@ -156,12 +165,6 @@ public class ThreadDownloadTorrent extends Thread implements EventListener {
 
                         @Override
                         public void onOccur(CustomEventObject e) {
-                        }
-
-                        @Override
-                        public void onFinish(CustomEventObject e) {
-                            numberFinished++;
-                            
                             //Phát sinh sự kiện OCCUR
                             event._value = numberFinished;
                             event._object1 = fi.getTenfile();
@@ -171,7 +174,11 @@ public class ThreadDownloadTorrent extends Thread implements EventListener {
                                 CustomEventListener l = (CustomEventListener) ev.nextElement();
                                 l.onOccur(event);
                             }
-                            
+                        }
+
+                        @Override
+                        public void onFinish(CustomEventObject e) {
+                            numberFinished++;
                             
                             if(numberFinished == sochunk)
                             {
