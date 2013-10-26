@@ -44,13 +44,6 @@ public class Bittorent extends javax.swing.JFrame {
      */
     public static ArrayList<PeerInfo> danhSachPeer = new ArrayList<>();
     
-    /**
-     * Thực hiện điều phối download các chunk theo nguyên lý chuồng bồ câu
-     * [IP | chunk_id, chunk_id, chunk_id, ...]
-     * [IP | chunk_id, chunk_id, chunk_id, ...]
-     * [IP | chunk_id, chunk_id, chunk_id, ...]
-     */
-    public static Dictionary<String, List<Integer>> chuongBoCau = new Hashtable<>();
 
     public Bittorent() {
 
@@ -119,7 +112,7 @@ public class Bittorent extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         btnNoiTapTin = new javax.swing.JButton();
         txtTaiTorrent = new javax.swing.JTextField();
-        jCboChunk = new javax.swing.JComboBox();
+        cmbChunk = new javax.swing.JComboBox();
         btnTaiTatCa = new javax.swing.JButton();
         btnTaiChunkDangChon = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -274,7 +267,7 @@ public class Bittorent extends javax.swing.JFrame {
                                         .addComponent(btnTaiChunkDangChon)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(btnTaiTatCa, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jCboChunk, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(cmbChunk, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel5)
@@ -320,7 +313,7 @@ public class Bittorent extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCboChunk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cmbChunk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnTaiChunkDangChon)
@@ -355,12 +348,13 @@ public class Bittorent extends javax.swing.JFrame {
     private void btnTaiChunkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaiChunkActionPerformed
         // TODO add your handling code here:
 
-        String chunk = jCboChunk.getSelectedItem().toString();
+        String chunk = cmbChunk.getSelectedItem().toString();
         ThreadDownloadChunk down = new ThreadDownloadChunk();
         ThongTinTapTin fo = new ThongTinTapTin();
         
         String tenfile = f.getName().substring(0, f.getName().length() - 8); // cắt bỏ đuôi .tottrent
         fo.setTenfile(tenfile);
+        fo.setSochunk(ThongTinTapTin.readChunkNumberFromTorrentFile(f.getAbsolutePath()));
         down.file = fo;
         down.peer = peer;
         
@@ -390,8 +384,21 @@ public class Bittorent extends javax.swing.JFrame {
         });
         
         
-        down.start();
+        //Gui broadcast tim kiem vi tri chunk
+        gui = new ThreadSendRequest();
+        gui.peer = Bittorent.peer;
+        gui.func = ThreadSendRequest.TenPhuongThuc.kiemTraFileChunk;
+        gui.tenFile = tenfile;
+        gui.soChunk = fo.getSochunk();
+        lblStatus.setText("Đang tìm vị trí chunk...");
+        gui.start();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Bittorent.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
+        down.start();
     }//GEN-LAST:event_btnTaiChunkActionPerformed
 
    /*
@@ -436,7 +443,6 @@ public class Bittorent extends javax.swing.JFrame {
                 return;
             }
             
-            Bittorent.chuongBoCau = new Hashtable<>();
             dlTorrent = new ThreadDownloadTorrent();
             dlTorrent.torrentFile = torrentFile;
             dlTorrent.peer = peer;
@@ -524,13 +530,13 @@ public class Bittorent extends javax.swing.JFrame {
                 fi.setTenfile(ten);
                 fi.setSochunk(sochunk);
                 
+                cmbChunk.removeAllItems();
                 for (int i = 0; i < sochunk; i++) {
                     File f = new File(ThongTinChunk.duongDanChunk + ten + "/" + ten + "_" + (i + 1 + ".chunk"));
 
                     if (!f.exists()) {
-                        jCboChunk.enable(true);
                         String chunkCanDow = f.getName();
-                        jCboChunk.addItem(chunkCanDow);
+                        cmbChunk.addItem(chunkCanDow);
                     }
                 }
             }
@@ -698,8 +704,8 @@ public class Bittorent extends javax.swing.JFrame {
     private javax.swing.JButton btnTaiChunkDangChon;
     private javax.swing.JButton btnTaiTatCa;
     private javax.swing.JButton btnThongTin;
+    private javax.swing.JComboBox cmbChunk;
     private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox jCboChunk;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

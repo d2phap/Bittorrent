@@ -25,7 +25,7 @@ public class PeerInfo {
     private int port = 0;
     private boolean status = false;
     private List<Integer> danhSachChunk = new ArrayList<>();
-    //private ArrayList<PeerInfo> listPeer;
+    private List<Integer> danhSachChunkDangDown = new ArrayList<>();
 
     /**
      * Đọc thông tin danh sách IP peer từ tập tin
@@ -68,6 +68,20 @@ public class PeerInfo {
     public void setDanhSachChunk(List<Integer> ds)
     {
         this.danhSachChunk = ds;
+    }
+    
+    /**
+     * Lấy danh sách chunk đang tải
+     * @return 
+     */
+    public List<Integer> getDanhSachChunkDangDown()
+    {
+        return this.danhSachChunkDangDown;
+    }
+    
+    public void setDanhSachChunkDangDown(List<Integer> ds)
+    {
+        this.danhSachChunkDangDown = ds;
     }
     
     /**

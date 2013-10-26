@@ -1,9 +1,149 @@
-26/10/2013 21:40:48 > #END_PROGRAM-------------------------------------------------------
-26/10/2013 21:40:32 > Gui yeu cau vi tri file chunks: GET_CHUNK=>test.zip=>42
-26/10/2013 21:40:29 > Gui yeu cau vi tri file chunks: GET_CHUNK=>test.zip=>42
-26/10/2013 21:39:37 > Nhan vi tri file chunks: 192.168.1.15=>1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,
-26/10/2013 21:39:21 > Gui yeu cau vi tri file chunks: GET_CHUNK=>test.zip=>42
-26/10/2013 21:38:42 > /192.168.43.5 OFFLINE
-26/10/2013 21:38:39 > /192.168.43.9 OFFLINE
-26/10/2013 21:38:36 > /192.168.1.15 ONLINE
-26/10/2013 21:38:36 > #START_PROGRAM-----------------------------------------------------
+27/10/2013 00:21:12 > #END_PROGRAM-------------------------------------------------------
+27/10/2013 00:21:10 > Lan nhan #136: Chunk #10, so byte nhan = 1024, tong byte da nhan = 139264
+27/10/2013 00:21:08 > Lan nhan #135: Chunk #10, so byte nhan = 1024, tong byte da nhan = 138240
+27/10/2013 00:21:07 > Lan nhan #134: Chunk #10, so byte nhan = 1024, tong byte da nhan = 137216
+27/10/2013 00:21:05 > Lan nhan #133: Chunk #10, so byte nhan = 1024, tong byte da nhan = 136192
+27/10/2013 00:21:04 > Lan nhan #132: Chunk #10, so byte nhan = 1024, tong byte da nhan = 135168
+27/10/2013 00:21:02 > Lan nhan #131: Chunk #10, so byte nhan = 1024, tong byte da nhan = 134144
+27/10/2013 00:21:00 > Lan nhan #130: Chunk #10, so byte nhan = 1024, tong byte da nhan = 133120
+27/10/2013 00:20:59 > Lan nhan #129: Chunk #10, so byte nhan = 1024, tong byte da nhan = 132096
+27/10/2013 00:20:57 > Lan nhan #128: Chunk #10, so byte nhan = 1024, tong byte da nhan = 131072
+27/10/2013 00:20:56 > Lan nhan #127: Chunk #10, so byte nhan = 1024, tong byte da nhan = 130048
+27/10/2013 00:20:54 > Lan nhan #126: Chunk #10, so byte nhan = 1024, tong byte da nhan = 129024
+27/10/2013 00:20:52 > Lan nhan #125: Chunk #10, so byte nhan = 1024, tong byte da nhan = 128000
+27/10/2013 00:20:51 > Lan nhan #124: Chunk #10, so byte nhan = 1024, tong byte da nhan = 126976
+27/10/2013 00:20:49 > Lan nhan #123: Chunk #10, so byte nhan = 1024, tong byte da nhan = 125952
+27/10/2013 00:20:47 > Lan nhan #122: Chunk #10, so byte nhan = 1024, tong byte da nhan = 124928
+27/10/2013 00:20:46 > Lan nhan #121: Chunk #10, so byte nhan = 1024, tong byte da nhan = 123904
+27/10/2013 00:20:44 > Lan nhan #120: Chunk #10, so byte nhan = 1024, tong byte da nhan = 122880
+27/10/2013 00:20:42 > Lan nhan #119: Chunk #10, so byte nhan = 1024, tong byte da nhan = 121856
+27/10/2013 00:20:41 > Lan nhan #118: Chunk #10, so byte nhan = 1024, tong byte da nhan = 120832
+27/10/2013 00:20:39 > Lan nhan #117: Chunk #10, so byte nhan = 1024, tong byte da nhan = 119808
+27/10/2013 00:20:38 > Lan nhan #116: Chunk #10, so byte nhan = 1024, tong byte da nhan = 118784
+27/10/2013 00:20:36 > Lan nhan #115: Chunk #10, so byte nhan = 1024, tong byte da nhan = 117760
+27/10/2013 00:20:35 > Lan nhan #114: Chunk #10, so byte nhan = 1024, tong byte da nhan = 116736
+27/10/2013 00:20:34 > Lan nhan #113: Chunk #10, so byte nhan = 1024, tong byte da nhan = 115712
+27/10/2013 00:20:32 > Lan nhan #112: Chunk #10, so byte nhan = 1024, tong byte da nhan = 114688
+27/10/2013 00:20:31 > Lan nhan #111: Chunk #10, so byte nhan = 1024, tong byte da nhan = 113664
+27/10/2013 00:20:29 > Lan nhan #110: Chunk #10, so byte nhan = 1024, tong byte da nhan = 112640
+27/10/2013 00:20:28 > Lan nhan #109: Chunk #10, so byte nhan = 1024, tong byte da nhan = 111616
+27/10/2013 00:20:27 > Lan nhan #108: Chunk #10, so byte nhan = 1024, tong byte da nhan = 110592
+27/10/2013 00:20:25 > Lan nhan #107: Chunk #10, so byte nhan = 1024, tong byte da nhan = 109568
+27/10/2013 00:20:24 > Lan nhan #106: Chunk #10, so byte nhan = 1024, tong byte da nhan = 108544
+27/10/2013 00:20:22 > Lan nhan #105: Chunk #10, so byte nhan = 1024, tong byte da nhan = 107520
+27/10/2013 00:20:21 > Lan nhan #104: Chunk #10, so byte nhan = 1024, tong byte da nhan = 106496
+27/10/2013 00:20:19 > Lan nhan #103: Chunk #10, so byte nhan = 1024, tong byte da nhan = 105472
+27/10/2013 00:20:18 > Lan nhan #102: Chunk #10, so byte nhan = 1024, tong byte da nhan = 104448
+27/10/2013 00:20:16 > Lan nhan #101: Chunk #10, so byte nhan = 1024, tong byte da nhan = 103424
+27/10/2013 00:20:15 > Lan nhan #100: Chunk #10, so byte nhan = 1024, tong byte da nhan = 102400
+27/10/2013 00:20:14 > Lan nhan #99: Chunk #10, so byte nhan = 1024, tong byte da nhan = 101376
+27/10/2013 00:20:12 > Lan nhan #98: Chunk #10, so byte nhan = 1024, tong byte da nhan = 100352
+27/10/2013 00:20:11 > Lan nhan #97: Chunk #10, so byte nhan = 1024, tong byte da nhan = 99328
+27/10/2013 00:20:09 > Lan nhan #96: Chunk #10, so byte nhan = 1024, tong byte da nhan = 98304
+27/10/2013 00:20:08 > Lan nhan #95: Chunk #10, so byte nhan = 1024, tong byte da nhan = 97280
+27/10/2013 00:20:07 > Lan nhan #94: Chunk #10, so byte nhan = 1024, tong byte da nhan = 96256
+27/10/2013 00:20:05 > Lan nhan #93: Chunk #10, so byte nhan = 1024, tong byte da nhan = 95232
+27/10/2013 00:20:04 > Lan nhan #92: Chunk #10, so byte nhan = 1024, tong byte da nhan = 94208
+27/10/2013 00:20:02 > Lan nhan #91: Chunk #10, so byte nhan = 1024, tong byte da nhan = 93184
+27/10/2013 00:20:01 > Lan nhan #90: Chunk #10, so byte nhan = 1024, tong byte da nhan = 92160
+27/10/2013 00:19:59 > Lan nhan #89: Chunk #10, so byte nhan = 1024, tong byte da nhan = 91136
+27/10/2013 00:19:58 > Lan nhan #88: Chunk #10, so byte nhan = 1024, tong byte da nhan = 90112
+27/10/2013 00:19:56 > Lan nhan #87: Chunk #10, so byte nhan = 1024, tong byte da nhan = 89088
+27/10/2013 00:19:55 > Lan nhan #86: Chunk #10, so byte nhan = 1024, tong byte da nhan = 88064
+27/10/2013 00:19:54 > Lan nhan #85: Chunk #10, so byte nhan = 1024, tong byte da nhan = 87040
+27/10/2013 00:19:52 > Lan nhan #84: Chunk #10, so byte nhan = 1024, tong byte da nhan = 86016
+27/10/2013 00:19:51 > Lan nhan #83: Chunk #10, so byte nhan = 1024, tong byte da nhan = 84992
+27/10/2013 00:19:49 > Lan nhan #82: Chunk #10, so byte nhan = 1024, tong byte da nhan = 83968
+27/10/2013 00:19:48 > Lan nhan #81: Chunk #10, so byte nhan = 1024, tong byte da nhan = 82944
+27/10/2013 00:19:46 > Lan nhan #80: Chunk #10, so byte nhan = 1024, tong byte da nhan = 81920
+27/10/2013 00:19:45 > Lan nhan #79: Chunk #10, so byte nhan = 1024, tong byte da nhan = 80896
+27/10/2013 00:19:43 > Lan nhan #78: Chunk #10, so byte nhan = 1024, tong byte da nhan = 79872
+27/10/2013 00:19:41 > Lan nhan #77: Chunk #10, so byte nhan = 1024, tong byte da nhan = 78848
+27/10/2013 00:19:39 > Lan nhan #76: Chunk #10, so byte nhan = 1024, tong byte da nhan = 77824
+27/10/2013 00:19:37 > Lan nhan #75: Chunk #10, so byte nhan = 1024, tong byte da nhan = 76800
+27/10/2013 00:19:33 > Lan nhan #74: Chunk #10, so byte nhan = 1024, tong byte da nhan = 75776
+27/10/2013 00:19:31 > Lan nhan #73: Chunk #10, so byte nhan = 1024, tong byte da nhan = 74752
+27/10/2013 00:19:30 > Lan nhan #72: Chunk #10, so byte nhan = 1024, tong byte da nhan = 73728
+27/10/2013 00:19:29 > Lan nhan #71: Chunk #10, so byte nhan = 1024, tong byte da nhan = 72704
+27/10/2013 00:19:27 > Lan nhan #70: Chunk #10, so byte nhan = 1024, tong byte da nhan = 71680
+27/10/2013 00:19:26 > Lan nhan #69: Chunk #10, so byte nhan = 1024, tong byte da nhan = 70656
+27/10/2013 00:19:24 > Lan nhan #68: Chunk #10, so byte nhan = 1024, tong byte da nhan = 69632
+27/10/2013 00:19:23 > Lan nhan #67: Chunk #10, so byte nhan = 1024, tong byte da nhan = 68608
+27/10/2013 00:19:21 > Lan nhan #66: Chunk #10, so byte nhan = 1024, tong byte da nhan = 67584
+27/10/2013 00:19:19 > Lan nhan #65: Chunk #10, so byte nhan = 1024, tong byte da nhan = 66560
+27/10/2013 00:19:18 > Lan nhan #64: Chunk #10, so byte nhan = 1024, tong byte da nhan = 65536
+27/10/2013 00:19:16 > Lan nhan #63: Chunk #10, so byte nhan = 1024, tong byte da nhan = 64512
+27/10/2013 00:19:15 > Lan nhan #62: Chunk #10, so byte nhan = 1024, tong byte da nhan = 63488
+27/10/2013 00:19:13 > Lan nhan #61: Chunk #10, so byte nhan = 1024, tong byte da nhan = 62464
+27/10/2013 00:19:12 > Lan nhan #60: Chunk #10, so byte nhan = 1024, tong byte da nhan = 61440
+27/10/2013 00:19:10 > Lan nhan #59: Chunk #10, so byte nhan = 1024, tong byte da nhan = 60416
+27/10/2013 00:19:08 > Lan nhan #58: Chunk #10, so byte nhan = 1024, tong byte da nhan = 59392
+27/10/2013 00:19:06 > Lan nhan #57: Chunk #10, so byte nhan = 1024, tong byte da nhan = 58368
+27/10/2013 00:19:04 > Lan nhan #56: Chunk #10, so byte nhan = 1024, tong byte da nhan = 57344
+27/10/2013 00:19:02 > Lan nhan #55: Chunk #10, so byte nhan = 1024, tong byte da nhan = 56320
+27/10/2013 00:19:00 > Lan nhan #54: Chunk #10, so byte nhan = 1024, tong byte da nhan = 55296
+27/10/2013 00:18:58 > Lan nhan #53: Chunk #10, so byte nhan = 1024, tong byte da nhan = 54272
+27/10/2013 00:18:56 > Lan nhan #52: Chunk #10, so byte nhan = 1024, tong byte da nhan = 53248
+27/10/2013 00:18:54 > Lan nhan #51: Chunk #10, so byte nhan = 1024, tong byte da nhan = 52224
+27/10/2013 00:18:52 > Lan nhan #50: Chunk #10, so byte nhan = 1024, tong byte da nhan = 51200
+27/10/2013 00:18:50 > Lan nhan #49: Chunk #10, so byte nhan = 1024, tong byte da nhan = 50176
+27/10/2013 00:18:47 > Lan nhan #48: Chunk #10, so byte nhan = 1024, tong byte da nhan = 49152
+27/10/2013 00:18:46 > Lan nhan #47: Chunk #10, so byte nhan = 1024, tong byte da nhan = 48128
+27/10/2013 00:18:45 > Lan nhan #46: Chunk #10, so byte nhan = 1024, tong byte da nhan = 47104
+27/10/2013 00:18:43 > Lan nhan #45: Chunk #10, so byte nhan = 1024, tong byte da nhan = 46080
+27/10/2013 00:18:42 > Lan nhan #44: Chunk #10, so byte nhan = 1024, tong byte da nhan = 45056
+27/10/2013 00:18:40 > Lan nhan #43: Chunk #10, so byte nhan = 1024, tong byte da nhan = 44032
+27/10/2013 00:18:38 > Lan nhan #42: Chunk #10, so byte nhan = 1024, tong byte da nhan = 43008
+27/10/2013 00:18:37 > Lan nhan #41: Chunk #10, so byte nhan = 1024, tong byte da nhan = 41984
+27/10/2013 00:18:36 > Lan nhan #40: Chunk #10, so byte nhan = 1024, tong byte da nhan = 40960
+27/10/2013 00:18:34 > Lan nhan #39: Chunk #10, so byte nhan = 1024, tong byte da nhan = 39936
+27/10/2013 00:18:33 > Lan nhan #38: Chunk #10, so byte nhan = 1024, tong byte da nhan = 38912
+27/10/2013 00:18:31 > Lan nhan #37: Chunk #10, so byte nhan = 1024, tong byte da nhan = 37888
+27/10/2013 00:18:29 > Lan nhan #36: Chunk #10, so byte nhan = 1024, tong byte da nhan = 36864
+27/10/2013 00:18:28 > Lan nhan #35: Chunk #10, so byte nhan = 1024, tong byte da nhan = 35840
+27/10/2013 00:18:26 > Lan nhan #34: Chunk #10, so byte nhan = 1024, tong byte da nhan = 34816
+27/10/2013 00:18:25 > Lan nhan #33: Chunk #10, so byte nhan = 1024, tong byte da nhan = 33792
+27/10/2013 00:18:23 > Lan nhan #32: Chunk #10, so byte nhan = 1024, tong byte da nhan = 32768
+27/10/2013 00:18:22 > Lan nhan #31: Chunk #10, so byte nhan = 1024, tong byte da nhan = 31744
+27/10/2013 00:18:20 > Lan nhan #30: Chunk #10, so byte nhan = 1024, tong byte da nhan = 30720
+27/10/2013 00:18:19 > Lan nhan #29: Chunk #10, so byte nhan = 1024, tong byte da nhan = 29696
+27/10/2013 00:18:18 > Lan nhan #28: Chunk #10, so byte nhan = 1024, tong byte da nhan = 28672
+27/10/2013 00:18:16 > Lan nhan #27: Chunk #10, so byte nhan = 1024, tong byte da nhan = 27648
+27/10/2013 00:18:15 > Lan nhan #26: Chunk #10, so byte nhan = 1024, tong byte da nhan = 26624
+27/10/2013 00:18:14 > Lan nhan #25: Chunk #10, so byte nhan = 1024, tong byte da nhan = 25600
+27/10/2013 00:18:13 > Lan nhan #24: Chunk #10, so byte nhan = 1024, tong byte da nhan = 24576
+27/10/2013 00:18:11 > Lan nhan #23: Chunk #10, so byte nhan = 1024, tong byte da nhan = 23552
+27/10/2013 00:18:10 > Lan nhan #22: Chunk #10, so byte nhan = 1024, tong byte da nhan = 22528
+27/10/2013 00:18:09 > Lan nhan #21: Chunk #10, so byte nhan = 1024, tong byte da nhan = 21504
+27/10/2013 00:18:08 > Lan nhan #20: Chunk #10, so byte nhan = 1024, tong byte da nhan = 20480
+27/10/2013 00:18:06 > Lan nhan #19: Chunk #10, so byte nhan = 1024, tong byte da nhan = 19456
+27/10/2013 00:18:05 > Lan nhan #18: Chunk #10, so byte nhan = 1024, tong byte da nhan = 18432
+27/10/2013 00:18:04 > Lan nhan #17: Chunk #10, so byte nhan = 1024, tong byte da nhan = 17408
+27/10/2013 00:18:03 > Lan nhan #16: Chunk #10, so byte nhan = 1024, tong byte da nhan = 16384
+27/10/2013 00:18:01 > Lan nhan #15: Chunk #10, so byte nhan = 1024, tong byte da nhan = 15360
+27/10/2013 00:18:00 > Lan nhan #14: Chunk #10, so byte nhan = 1024, tong byte da nhan = 14336
+27/10/2013 00:17:58 > Lan nhan #13: Chunk #10, so byte nhan = 1024, tong byte da nhan = 13312
+27/10/2013 00:17:57 > Lan nhan #12: Chunk #10, so byte nhan = 1024, tong byte da nhan = 12288
+27/10/2013 00:17:56 > Lan nhan #11: Chunk #10, so byte nhan = 1024, tong byte da nhan = 11264
+27/10/2013 00:17:55 > Lan nhan #10: Chunk #10, so byte nhan = 1024, tong byte da nhan = 10240
+27/10/2013 00:17:53 > Lan nhan #9: Chunk #10, so byte nhan = 1024, tong byte da nhan = 9216
+27/10/2013 00:17:52 > Lan nhan #8: Chunk #10, so byte nhan = 1024, tong byte da nhan = 8192
+27/10/2013 00:17:51 > Lan nhan #7: Chunk #10, so byte nhan = 1024, tong byte da nhan = 7168
+27/10/2013 00:17:49 > Lan nhan #6: Chunk #10, so byte nhan = 1024, tong byte da nhan = 6144
+27/10/2013 00:17:48 > Lan nhan #5: Chunk #10, so byte nhan = 1024, tong byte da nhan = 5120
+27/10/2013 00:17:46 > Lan nhan #4: Chunk #10, so byte nhan = 1024, tong byte da nhan = 4096
+27/10/2013 00:17:44 > Lan nhan #3: Chunk #10, so byte nhan = 1024, tong byte da nhan = 3072
+27/10/2013 00:17:43 > Lan nhan #2: Chunk #10, so byte nhan = 1024, tong byte da nhan = 2048
+27/10/2013 00:17:41 > Lan nhan #1: Chunk #10, so byte nhan = 1024, tong byte da nhan = 1024
+27/10/2013 00:17:39 > Nhan 'OK' tu IP: /192.168.1.15
+27/10/2013 00:17:39 > Gui ten tap tin chunk: test.zip_10 den IP: /192.168.1.15
+27/10/2013 00:17:39 > Nhan OK tu IP: /192.168.1.15
+27/10/2013 00:17:39 > Gui yeu cau Down_File toi IP: /192.168.1.15
+27/10/2013 00:17:39 > Gui yeu cau vi tri file chunks: GET_CHUNK=>test.zip=>42
+27/10/2013 00:17:36 > Gui yeu cau vi tri file chunks: GET_CHUNK=>test.zip=>42
+27/10/2013 00:17:36 > Nhan vi tri file chunks: 192.168.1.15=>1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,
+27/10/2013 00:17:36 > Gui yeu cau vi tri file chunks: GET_CHUNK=>test.zip=>42
+27/10/2013 00:17:31 > /192.168.43.5 OFFLINE
+27/10/2013 00:17:28 > /192.168.43.9 OFFLINE
+27/10/2013 00:17:25 > /192.168.1.15 ONLINE
+27/10/2013 00:17:23 > #START_PROGRAM-----------------------------------------------------

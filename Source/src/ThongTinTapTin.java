@@ -194,7 +194,7 @@ public class ThongTinTapTin {
     }
 
     /**
-     * Đọc mảng byte từ file chunk
+     * Đọc chunk thành mảng byte[]
      *
      * @param indexchunk
      * @return
@@ -257,6 +257,33 @@ public class ThongTinTapTin {
 
             return null;
         }
+    }
+    
+    /**
+     * Đọc số chunk từ file torrent
+     * @param torrentFile
+     * @return 
+     */
+    public static int readChunkNumberFromTorrentFile(String torrentFile)
+    {
+        FileInputStream fin = null;
+        int sochunk = 0;
+        
+        try {
+            fin = new FileInputStream(torrentFile);
+            
+            Scanner input = new Scanner(fin);
+            sochunk = input.nextInt();
+            fin.close();
+            
+        } catch (Exception ex) {
+            try {
+                fin.close();
+            } catch (IOException ex1) {
+            }
+        }
+        
+        return sochunk;
     }
 
     /**
