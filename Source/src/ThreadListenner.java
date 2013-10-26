@@ -43,12 +43,12 @@ public class ThreadListenner extends Thread {
                     if (yc.compareTo("ONL") == 0) {
                         socket.setSoTimeout(5000); // quá 5s mà không ai trả lời hủy
                         
-                        for (int i = 0; i < Bittorent.peer.countListPeer(); i++) {
+                        for (int i = 0; i < Bittorent.danhSachPeer.size(); i++) {
                             //Thong bao Peer(i) da san sang ket noi
-                            if (Bittorent.peer.getPeerItem(i).getIpAddresss().getHostAddress()
+                            if (Bittorent.danhSachPeer.get(i).getIpAddresss().getHostAddress()
                                     .compareTo(rcvPacket.getAddress().getHostAddress()) == 0) {
                                 
-                                Bittorent.peer.getPeerItem(i).setStatus(true);
+                                Bittorent.danhSachPeer.get(i).setStatus(true);
                                 break;
                             }
                         }

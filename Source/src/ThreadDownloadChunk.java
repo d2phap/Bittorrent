@@ -52,7 +52,7 @@ public class ThreadDownloadChunk extends Thread {
                 }
 
 
-                for (int i = 0; i < peer.countListPeer(); i++) {
+                for (int i = 0; i < Bittorent.danhSachPeer.size(); i++) {
                     try {
                         
                         //1. Lap danh sach chunk trong tung peer
@@ -62,7 +62,7 @@ public class ThreadDownloadChunk extends Thread {
                         //   lam PEER download 
                         
                         
-                        String _ip = peer.getPeerItem(i).getIpAddresss().toString();
+                        String _ip = Bittorent.danhSachPeer.get(i).getIpAddresss().toString();
                         
                         
                         buffer = new byte[1024];
@@ -71,7 +71,7 @@ public class ThreadDownloadChunk extends Thread {
                         socket.setSoTimeout(5000);
 
                         sendPacket = new DatagramPacket("Down_File".getBytes(), "Down_File".getBytes().length,
-                                peer.getPeerItem(i).getIpAddresss(), Bittorent.portlisten);
+                                Bittorent.danhSachPeer.get(i).getIpAddresss(), Bittorent.portlisten);
 
                         socket.send(sendPacket); //gui Yêu Cầu down_file 
                         LogFile.Write("Gui yeu cau Down_File toi IP: " + _ip);

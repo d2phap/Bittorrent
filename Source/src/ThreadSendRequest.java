@@ -54,11 +54,11 @@ public class ThreadSendRequest extends Thread {
             socket = new DatagramSocket(Bittorent.portlisten + port);
             socket.setSoTimeout(3000);
 
-            for (int i = 0; i < peer.countListPeer(); i++) {
+            for (int i = 0; i < Bittorent.danhSachPeer.size(); i++) {
                 
-                String dc = peer.getPeerItem(i).getIpAddresss().getHostAddress();
+                String dc = Bittorent.danhSachPeer.get(i).getIpAddresss().getHostAddress();
                 sendPacket = new DatagramPacket("ONL".getBytes(), "ONL".getBytes().length, 
-                        peer.getPeerItem(i).getIpAddresss(), Bittorent.portlisten);
+                        Bittorent.danhSachPeer.get(i).getIpAddresss(), Bittorent.portlisten);
                 
                 try {
                     socket.send(sendPacket);
@@ -69,13 +69,13 @@ public class ThreadSendRequest extends Thread {
                     String gt = new String(rcvPacket.getData(), 0, rcvPacket.getLength());
                     
                     if (gt != null) {
-                        peer.getPeerItem(i).setStatus(true);
-                        LogFile.Write(peer.getPeerItem(i).getIpAddresss() + " ONLINE");
+                        Bittorent.danhSachPeer.get(i).setStatus(true);
+                        LogFile.Write(Bittorent.danhSachPeer.get(i).getIpAddresss() + " ONLINE");
                     }
                     
                 } catch (IOException ex) {
 
-                    LogFile.Write(peer.getPeerItem(i).getIpAddresss() + " OFFLINE");
+                    LogFile.Write(Bittorent.danhSachPeer.get(i).getIpAddresss() + " OFFLINE");
                 }
             }
             
@@ -92,12 +92,12 @@ public class ThreadSendRequest extends Thread {
             socket = new DatagramSocket(Bittorent.portlisten + port);
             socket.setSoTimeout(3000);
 
-            for (int i = 0; i < peer.countListPeer(); i++) {
+            for (int i = 0; i < Bittorent.danhSachPeer.size(); i++) {
                 
                 String duLieuGui = "GET_CHUNK=>" + tenFile + "=>" + soLuongChunkToiDa;
-                String dc = peer.getPeerItem(i).getIpAddresss().getHostAddress();
+                String dc = Bittorent.danhSachPeer.get(i).getIpAddresss().getHostAddress();
                 sendPacket = new DatagramPacket(duLieuGui.getBytes(), duLieuGui.getBytes().length, 
-                        peer.getPeerItem(i).getIpAddresss(), Bittorent.portlisten);
+                        Bittorent.danhSachPeer.get(i).getIpAddresss(), Bittorent.portlisten);
                 
                 try {
                     socket.send(sendPacket);
@@ -114,7 +114,7 @@ public class ThreadSendRequest extends Thread {
                     LogFile.Write("Nhan vi tri file chunks: " + gt);
                     
                     if (gt != null) {
-                        peer.getPeerItem(i).setStatus(true);
+                        Bittorent.danhSachPeer.get(i).setStatus(true);
                         
                         //Lay dia chi IP
                         String _ip = gt.split("=>")[0];

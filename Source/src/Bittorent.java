@@ -39,6 +39,10 @@ public class Bittorent extends javax.swing.JFrame {
     public static File f;
     private ThreadDownloadTorrent dlTorrent;
     private int isPause = 0;
+    /**
+     * Danh sách lưu thông tin các peer
+     */
+    public static ArrayList<PeerInfo> danhSachPeer = new ArrayList<>();
     
     /**
      * Thực hiện điều phối download các chunk theo nguyên lý chuồng bồ câu
@@ -77,7 +81,10 @@ public class Bittorent extends javax.swing.JFrame {
             dir.mkdirs();
         }
         
+        //Load peer hien tai
         peer = new PeerInfo();
+        //Load danh sach peer trong file Map
+        danhSachPeer = PeerInfo.loadListPeer();
         nghe = new ThreadListenner();
         nghe.start();
         

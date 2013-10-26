@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,24 +20,27 @@ import java.util.logging.Logger;
  */
 public class PeerInfo {
 
-    private int id;
-    private InetAddress ipAdrress;
-    private int port;
-    private boolean status;
-    private ArrayList<PeerInfo> listPeer;
+    private int id = 0;
+    private InetAddress ipAdrress = null;
+    private int port = 0;
+    private boolean status = false;
+    private List<Integer> danhSachChunk = new ArrayList<>();
+    //private ArrayList<PeerInfo> listPeer;
 
+    /**
+     * Đọc thông tin danh sách IP peer từ tập tin
+     */
     public PeerInfo() {
         try {
-            listPeer = new ArrayList();
-            loadListPeer();
+            loadPeerFromMapFile();
         } catch (Exception ex) {
         }
-
+        
     }
 
     public PeerInfo(int _id, String _ip, int _port, boolean _status) {
         this.id = _id;
-        setIpAddress(_ip);
+        this.setIpAddress(_ip);
         this.port = _port;
         this.status = _status;
     }
@@ -48,6 +52,24 @@ public class PeerInfo {
         this.status = peer.status;
     }
 
+    /**
+     * Lấy các chunks có trong peer
+     * @return 
+     */
+    public List<Integer> getDanhSachChunk()
+    {
+        return danhSachChunk;
+    }
+    
+    /**
+     * Gán các chunks có trong peer
+     * @param ds 
+     */
+    public void setDanhSachChunk(List<Integer> ds)
+    {
+        this.danhSachChunk = ds;
+    }
+    
     /**
      * @return the id
      */
@@ -101,7 +123,7 @@ public class PeerInfo {
 
     /**
      * @return the lspeer
-     */
+     *
     public PeerInfo getPeerItem(int index) {
         return listPeer.get(index);
     }
@@ -112,7 +134,7 @@ public class PeerInfo {
 
     /**
      * @param lspeer the lspeer to set
-     */
+     *
     public void addPeer(PeerInfo peer) {
         listPeer.add(peer);
     }
@@ -131,29 +153,71 @@ public class PeerInfo {
         this.status = status;
     }
 
-    //load peer
-    public void loadListPeer() throws IOException {
+    /**
+     * Đọc thông tin peer hiện tại từ file Map
+     * @throws IOException 
+     */
+    public void loadPeerFromMapFile() throws IOException {
         FileInputStream fis = null;
+        
         try {
             fis = new FileInputStream("./Map/Nodes.map");
             Scanner input = new Scanner(fis);
             int n = input.nextInt();
+            
             for (int i = 0; i < n; i++) {
                 int _id = input.nextInt();
                 String _ip = input.next();
                 int _port = input.nextInt();
+                
                 if (_ip.compareTo(InetAddress.getLocalHost().getHostAddress()) == 0) {
                     this.id = _id;
                     setIpAddress(_ip);
                     this.port = _port;
                     this.status = false;
-                } else {
-                    addPeer(new PeerInfo(_id, _ip, _port, false));
+                    
+                    break;
                 }
             }
         } catch (IOException ex) {
         } finally {
             fis.close();
         }
+    }
+    
+    
+    /**
+     * Đọc danh sách tất cả các peer từ file Map
+     * @return
+     * @throws IOException 
+     */
+    public static ArrayList<PeerInfo> loadListPeer() {
+        FileInputStream fis = null;
+        ArrayList<PeerInfo> ds = new ArrayList<>();
+        
+        try {
+            fis = new FileInputStream("./Map/Nodes.map");
+            Scanner input = new Scanner(fis);
+            int n = input.nextInt();
+            
+            for (int i = 0; i < n; i++) {
+                int _id = input.nextInt();
+                String _ip = input.next();
+                int _port = input.nextInt();
+                
+                if (_ip.compareTo(InetAddress.getLocalHost().getHostAddress()) == 0) {
+                    //Phần tử đầu tiên trong danh sách là peer chủ
+                    //ds.add(0, new PeerInfo(_id, _ip, _port, true));
+                } else {
+                    //addPeer(new PeerInfo(_id, _ip, _port, false));
+                    ds.add(new PeerInfo(_id, _ip, _port, false));
+                }
+            }
+            
+            fis.close();
+        } catch (IOException ex) {
+        }
+        
+        return ds;
     }
 }
