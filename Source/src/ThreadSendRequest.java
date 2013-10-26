@@ -123,40 +123,27 @@ public class ThreadSendRequest extends Thread {
                         String[] _chunks = gt.split("=>")[1].split(",");
                         
                         //Lay danh sach chunk cua _ip
-                        List<Integer> dsChunk = Bittorent.viTriChunk.get(_ip);
-                        
-                        //Khong ton tai IP _ip trong danh sach
-                        if(dsChunk == null)
+                        List<Integer> dsChunk = new ArrayList<>();
+                        for (int j = 0; j < _chunks.length; j++) 
                         {
-                            //Cap nhat danh sach chunk ID
-                            dsChunk = new ArrayList<>();                            
-                            for (int j = 0; j < _chunks.length; j++) 
-                            {
-                                try {
-                                    int chunkID = Integer.parseInt(_chunks[j]);
-                                    dsChunk.add(chunkID);
-                                } catch (Exception ex) {
-                                }
-
-                            }
-                            
-                            //Them moi
-                            Bittorent.viTriChunk.put(_ip, dsChunk);
-                        }
-                        //Da ton tai IP _ip
-                        else
-                        {
-                            //Cap nhat danh sach chunk ID
-                            dsChunk = new ArrayList<>();                            
-                            for (int j = 0; j < _chunks.length; j++) 
+                            try 
                             {
                                 int chunkID = Integer.parseInt(_chunks[j]);
                                 dsChunk.add(chunkID);
+                            } catch (Exception ex) {
                             }
-                            
-                            Bittorent.viTriChunk.remove(_ip);
-                            //Them moi
-                            Bittorent.viTriChunk.put(_ip, dsChunk);
+
+                        }
+                        
+                        //Cap nhat danh sach chunk cho peer
+                        for (int j = 0; j < Bittorent.danhSachPeer.size(); j++) 
+                        {
+                            String peerIP = Bittorent.danhSachPeer.get(j).getIpAddresss().getHostAddress();
+                            if(_ip.compareTo(peerIP) == 0)
+                            {
+                                Bittorent.danhSachPeer.get(j).setDanhSachChunk(dsChunk);
+                                break;
+                            }
                         }
                         
                     }

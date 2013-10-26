@@ -51,7 +51,6 @@ public class Bittorent extends javax.swing.JFrame {
      * [IP | chunk_id, chunk_id, chunk_id, ...]
      */
     public static Dictionary<String, List<Integer>> chuongBoCau = new Hashtable<>();
-    public static Dictionary<String, List<Integer>> viTriChunk = new Hashtable<>();
 
     public Bittorent() {
 
