@@ -73,7 +73,7 @@ public class ThreadDownloadChunk extends Thread {
                     
                     //Phát sinh sự kiện FINISH
                     e = targets.elements();
-                    event._errorMessage = "Không tìm thấy peer nào chứa chunk '" + tenChunk + "'";
+                    event._errorMessage = "Chunk '" + tenChunk + ".chunk': khong tim thay";
                     while (e.hasMoreElements()) {
                         CustomEventListener l = (CustomEventListener) e.nextElement();
                         l.onError(event);

@@ -75,7 +75,7 @@ public class ThreadSendChunk extends Thread {
                 socket.send(sendPacket); // gui 1024  byte
                 LogFile.Write("Lan gui #" + n + ": " + b.length + 
                         "bytes, dia chi = " + rcvPacket.getAddress() + 
-                        "port = " + rcvPacket.getPort());
+                        ", port = " + rcvPacket.getPort());
                 
                 //Nhận dữ liệu phản hồi
                 socket.receive(rcvPacket); // nhận ok
@@ -85,10 +85,9 @@ public class ThreadSendChunk extends Thread {
             socket.send(sendPacket);
             LogFile.Write("Lan gui END" + ": " + 
                         "dia chi = " + rcvPacket.getAddress() + 
-                        "port = " + rcvPacket.getPort());
+                        ", port = " + rcvPacket.getPort());
 
         } catch (Exception e) {
-            e.printStackTrace();
         }
 
         return true;

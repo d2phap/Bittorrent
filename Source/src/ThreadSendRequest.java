@@ -139,7 +139,7 @@ public class ThreadSendRequest extends Thread {
                         for (int j = 0; j < Bittorent.danhSachPeer.size(); j++) 
                         {
                             String peerIP = Bittorent.danhSachPeer.get(j).getIpAddresss().getHostAddress();
-                            if(_ip.compareTo(peerIP) == 0)
+                            if(_ip.contains(peerIP))
                             {
                                 Bittorent.danhSachPeer.get(j).setDanhSachChunk(dsChunk);
                                 break;

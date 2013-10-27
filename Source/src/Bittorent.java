@@ -355,6 +355,28 @@ public class Bittorent extends javax.swing.JFrame {
     private void btnThongTinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongTinActionPerformed
         // TODO add your handling code here:
         JOptionPane.showMessageDialog(new JFrame(), "Thông tin nhóm thực hiện:\n\nBùi Bá Lộc - 1241363\nDương Diệu Pháp - 1241378");
+        
+        
+        ThongTinTapTin file = new ThongTinTapTin();
+        file.setTenfile("test.zip");
+        String hash = file.getHashCode(ThongTinChunk.duongDanChunk + file.getTenfile() + 
+                "/" + file.getTenfile() + "_" + 27 + ".chunk");
+        //Chen header vao goi tin
+        //2 bytes PKG LENGTH
+        byte[] pkgLength = Integer.valueOf(1024).toString().getBytes();
+
+        //2 bytes CHECKSUM
+        byte[] checksum = hash.getBytes();
+
+        //4 bytes SEQ: Vi tri byte dau tien
+        byte[] seq = Integer.valueOf(1 * 1024).toString().getBytes();
+
+        //4 bytes ACK: Vi tri byte cuoi cung da nhan, = -1 neu chua nhan
+        byte[] ack = Integer.valueOf(1 * 1024 - 1).toString().getBytes();
+
+        //Tinh kich thuoc header
+        int soByteHeader = pkgLength.length + checksum.length + seq.length + ack.length;
+        LogFile.Write(pkgLength.length + "_" + checksum.length + "_" + seq.length + "_" + ack.length);
     }//GEN-LAST:event_btnThongTinActionPerformed
 
     /*
@@ -393,7 +415,7 @@ public class Bittorent extends javax.swing.JFrame {
 
             @Override
             public void onFinish(CustomEventObject e) {
-                lblStatus.setText("Tải hoàn tất");
+                lblStatus.setText("Tải '" + e._object1 + "' hoàn tất");
                 progStatus.setValue(progStatus.getMaximum());
             }
             
