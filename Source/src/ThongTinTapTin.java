@@ -23,6 +23,7 @@ import javax.swing.JOptionPane;
  */
 public class ThongTinTapTin {
 
+    //Kich thuoc chunk 512 KB -> 524288 bytes
     public static long kichThuocChunk = 512 * 1024;
     private String tenFile;
     private long kichThuocFile;

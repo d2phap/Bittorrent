@@ -1,6 +1,7 @@
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
@@ -30,7 +31,7 @@ public class ThreadDownloadChunk extends Thread {
     public boolean startDownload() {
         try {
             String tenChunk = file.getTenfile() + "_" + thuTuChunk;
-            
+
             // if we have no listeners, do nothing...
             if (listeners != null && !listeners.isEmpty()) {
                 Vector targets;
@@ -51,26 +52,24 @@ public class ThreadDownloadChunk extends Thread {
 
                 /////////////////////////////////////////////
                 //TOI UU HOA VIEC LUA CHON PEER DE TAI CHUNK
-                
+
                 //Danh sach peer chua chunk
                 List<Integer> dsPeer = new ArrayList<>();
-                
+
                 //Kiem tra chunk dang down o peer nao
                 for (int i = 0; i < Bittorent.danhSachPeer.size(); i++) {
-                    
+
                     //Neu chunk nam trong peer(i)
-                    if(Bittorent.danhSachPeer.get(i).getDanhSachChunk().indexOf(thuTuChunk) != -1)
-                    {
+                    if (Bittorent.danhSachPeer.get(i).getDanhSachChunk().indexOf(thuTuChunk) != -1) {
                         //Peer(i) chua chunk
                         dsPeer.add(i);
                     }
                 }
-                
+
                 //Neu khong co peer nao chua chunk nay
-                if(dsPeer.size() <= 0)
-                {
+                if (dsPeer.size() <= 0) {
                     LogFile.Write("Chunk #" + thuTuChunk + ": Khong tim thay!");
-                    
+
                     //Phát sinh sự kiện FINISH
                     e = targets.elements();
                     event._errorMessage = "Chunk '" + tenChunk + ".chunk': khong tim thay";
@@ -78,31 +77,30 @@ public class ThreadDownloadChunk extends Thread {
                         CustomEventListener l = (CustomEventListener) e.nextElement();
                         l.onError(event);
                     }
-                    
+
                     return false;
                 }
-                
+
                 //Tim peer ranh roi nhat
                 int minPeer_soChunks = dsPeer.get(0);
-                
+
                 //Dieu phoi downloading chunk
                 //Tim peer nao dang down it chunk nhat
                 for (int i = 1; i < dsPeer.size(); i++) {
                     int vPeer_soChunk = dsPeer.get(i);
-                    
-                    if(Bittorent.danhSachPeer.get(minPeer_soChunks).getDanhSachChunkDangDown().size() > 
-                       Bittorent.danhSachPeer.get(vPeer_soChunk).getDanhSachChunkDangDown().size())
-                    {
+
+                    if (Bittorent.danhSachPeer.get(minPeer_soChunks).getDanhSachChunkDangDown().size()
+                            > Bittorent.danhSachPeer.get(vPeer_soChunk).getDanhSachChunkDangDown().size()) {
                         minPeer_soChunks = vPeer_soChunk;
                     }
                 }
                 ////////////////////////////////////////////
-                
+
 
                 try {
 
                     String _ip = Bittorent.danhSachPeer.get(minPeer_soChunks).getIpAddresss().toString();
-
+                    int soByteHeader = 52;
 
                     buffer = new byte[1024];
 
@@ -139,7 +137,6 @@ public class ThreadDownloadChunk extends Thread {
                     int n = 0; // số lần startDownload
                     int size = 0;
 
-
                     while (rc.compareTo("END") != 0) {
 
                         //Tạm dừng nếu nhận lệnh isRunning = false
@@ -155,10 +152,45 @@ public class ThreadDownloadChunk extends Thread {
                             l.onOccur(event);
                         }
 
-                        int numbyte = rcvPacket.getData().length;
+                        if(n == 538)
+                        {
+                            n = 538;
+                        }
+
+                        //Chen 52 bytes header vao goi tin 
+                        //4 bytes PKG LENGTH
+                        byte[] pkgLength = new byte[4];
+                        System.arraycopy(rcvPacket.getData(), 0, pkgLength, 0, pkgLength.length);
+
+                        //40 bytes CHECKSUM
+                        byte[] checksum = new byte[40];
+                        System.arraycopy(rcvPacket.getData(), pkgLength.length, checksum, 0, checksum.length);
+
+                        //4 bytes SEQ: Vi tri byte dau tien
+                        byte[] seq = new byte[4];
+                        System.arraycopy(rcvPacket.getData(), pkgLength.length + checksum.length, seq, 0, seq.length);
+
+                        //4 bytes ACK: Vi tri byte cuoi cung da nhan, = -1 neu chua nhan
+                        byte[] ack = new byte[4];
+                        System.arraycopy(rcvPacket.getData(), pkgLength.length + checksum.length + seq.length, ack, 0, ack.length);
+
+                        int kichThuocGoiTin = ByteBuffer.wrap(pkgLength).getInt();
+                        String maHash = new String(checksum);
+                        int seqNumber = ByteBuffer.wrap(seq).getInt();
+                        int ackNumber = ByteBuffer.wrap(ack).getInt();
+
+                        //Lay kich thuoc goi tin
+                        int numbyte = kichThuocGoiTin - soByteHeader;
+                        
+                        LogFile.Write("Kiem tra lan nhan #" + n + ": "
+                                + "pkgSize = " + kichThuocGoiTin + ", "
+                                + "SHA-1 = " + maHash + ", "
+                                + "SEQ = " + seqNumber + ", "
+                                + "ACK = " + ackNumber);
+
 
                         //copy du lieu nhan dc vao mang data
-                        System.arraycopy(rcvPacket.getData(), 0, data, n * 1024, numbyte);
+                        System.arraycopy(rcvPacket.getData(), soByteHeader, data, n * (1024 - soByteHeader), numbyte);
                         size += numbyte; //tong kich thuoc da nhan
                         n++;
 
@@ -192,7 +224,7 @@ public class ThreadDownloadChunk extends Thread {
 
                 } catch (Exception ex) {
                     LogFile.Write("Chunk #" + thuTuChunk + ": Time out!");
-                    
+
                     //Phát sinh sự kiện FINISH
                     e = targets.elements();
                     event._errorMessage = "'" + tenChunk + ".chunk': time out. ";
@@ -206,11 +238,11 @@ public class ThreadDownloadChunk extends Thread {
             }
 
         } catch (Exception e) {
+            LogFile.Write("");
         }
         return true;
     }
 
-    
     public void run() {
         startDownload();
     }
