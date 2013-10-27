@@ -16,4 +16,5 @@ public interface CustomEventListener extends EventListener {
     public void onStart(CustomEventObject e);
     public void onOccur(CustomEventObject e);
     public void onFinish(CustomEventObject e);
+    public void onError(CustomEventObject e);
 }

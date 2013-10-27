@@ -190,6 +190,25 @@ public class ThreadDownloadTorrent extends Thread implements EventListener {
                                 }
                             }
                         }
+                        
+                        @Override
+                        public void onError(CustomEventObject e) {
+                            numberFinished++;
+                            
+                            //Phát sinh sự kiện ERROR
+                            event._errorMessage = e._errorMessage;
+                            Enumeration ev2 = targets.elements();
+                            while (ev2.hasMoreElements()) {
+                                CustomEventListener l = (CustomEventListener) ev2.nextElement();
+                                l.onError(event);
+                            }
+                            
+                            try {
+                                Thread.sleep(1000);
+                            } catch (InterruptedException ex) {
+                                Logger.getLogger(ThreadDownloadTorrent.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
                     });
                     
                     listThreadDownload.add(down);

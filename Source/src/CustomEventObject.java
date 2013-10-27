@@ -30,9 +30,9 @@ public class CustomEventObject {
      */
     public Object _object2 = null;
     /**
-     * Biến dự trữ, muốn lưu cái gì thì lưu
+     * Lưu thông báo lỗi nếu có
      */
-    public Object _object3 = null;
+    public String _errorMessage = "";
     
     /**
      * Khởi tạo mới đối tượng

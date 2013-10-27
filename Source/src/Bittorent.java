@@ -396,6 +396,16 @@ public class Bittorent extends javax.swing.JFrame {
                 lblStatus.setText("Tải hoàn tất");
                 progStatus.setValue(progStatus.getMaximum());
             }
+            
+            @Override
+            public void onError(CustomEventObject e) {
+                lblStatus.setText(e._errorMessage);
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Bittorent.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         });
         
         
@@ -486,9 +496,24 @@ public class Bittorent extends javax.swing.JFrame {
 
                 @Override
                 public void onFinish(CustomEventObject e) {
-                    lblStatus.setText("Tải hoàn tất.");
+                    
+                    if(!e._errorMessage.equals(""))
+                    {
+                        lblStatus.setText("Hoàn tất! Lỗi: " + e._errorMessage);
+                    }
+                    
                     isPause = 0;
                     btnTaiTatCa.setText("Tải tất cả");
+                }
+                
+                @Override
+                public void onError(CustomEventObject e) {
+                    lblStatus.setText(e._errorMessage);
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(Bittorent.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             });
             
@@ -624,6 +649,11 @@ public class Bittorent extends javax.swing.JFrame {
                 public void onFinish(CustomEventObject e) {
                     lblStatus.setText("Nối tập tin hoàn tất (" + e._object1.toString() + ") 100%...");
                 }
+                
+                @Override
+                public void onError(CustomEventObject e) {
+                    lblStatus.setText("Nối không thành công.");
+                }
             });
             
             c.start();
@@ -665,6 +695,11 @@ public class Bittorent extends javax.swing.JFrame {
                 @Override
                 public void onFinish(CustomEventObject e) {
                     lblStatus.setText("Cắt tập tin hoàn tất (" + e._max + " chunks)...");
+                }
+                
+                @Override
+                public void onError(CustomEventObject e) {
+                    lblStatus.setText("Cắt không thành công.");
                 }
             });
             

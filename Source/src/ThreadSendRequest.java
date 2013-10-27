@@ -158,39 +158,4 @@ public class ThreadSendRequest extends Thread {
         }
     }
     
-    
-    private void sendPacket() {
-        int timeOut = 500;
-        try {
-            int flag = 1;
-            do {
-                socket.setSoTimeout(timeOut);
-                socket.send(sendPacket);
-                int n = 1;
-                while (n < 5) {
-                    try {
-                        rcvPacket = new DatagramPacket(buffer, buffer.length);
-                        socket.receive(rcvPacket);
-                        timeOut -= 100;
-                        flag = 6;
-                        break;
-                    } catch (SocketTimeoutException e) {
-                        timeOut += 100;
-                        socket.setSoTimeout(timeOut);
-                        n++;
-                        continue;
-                    }
-                }
-                timeOut += 200;
-                flag++;
-            } while (flag < 5);
-            if (flag == 5) {
-                socket.close();
-                //this.stop();
-            }
-        } catch (Exception ex) {
-            socket.close();
-            //this.stop();
-        }
-    }
 }

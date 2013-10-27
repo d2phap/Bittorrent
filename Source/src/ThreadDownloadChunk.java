@@ -1,12 +1,10 @@
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
-import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Vector;
-import javax.swing.JOptionPane;
 
 /*
  * To change this template, choose Tools | Templates
@@ -71,11 +69,14 @@ public class ThreadDownloadChunk extends Thread {
                 //Neu khong co peer nao chua chunk nay
                 if(dsPeer.size() <= 0)
                 {
+                    LogFile.Write("Chunk #" + thuTuChunk + ": Khong tim thay!");
+                    
                     //Phát sinh sự kiện FINISH
                     e = targets.elements();
+                    event._errorMessage = "Không tìm thấy peer nào chứa chunk '" + tenChunk + "'";
                     while (e.hasMoreElements()) {
                         CustomEventListener l = (CustomEventListener) e.nextElement();
-                        l.onFinish(event);
+                        l.onError(event);
                     }
                     
                     return false;
@@ -85,6 +86,7 @@ public class ThreadDownloadChunk extends Thread {
                 int minPeer_soChunks = dsPeer.get(0);
                 
                 //Dieu phoi downloading chunk
+                //Tim peer nao dang down it chunk nhat
                 for (int i = 1; i < dsPeer.size(); i++) {
                     int vPeer_soChunk = dsPeer.get(i);
                     
@@ -94,7 +96,8 @@ public class ThreadDownloadChunk extends Thread {
                         minPeer_soChunks = vPeer_soChunk;
                     }
                 }
-
+                ////////////////////////////////////////////
+                
 
                 try {
 
@@ -188,13 +191,14 @@ public class ThreadDownloadChunk extends Thread {
                     socket.close();
 
                 } catch (Exception ex) {
-                    LogFile.Write("Time out!");
+                    LogFile.Write("Chunk #" + thuTuChunk + ": Time out!");
                     
                     //Phát sinh sự kiện FINISH
                     e = targets.elements();
+                    event._errorMessage = "'" + tenChunk + ".chunk': time out. ";
                     while (e.hasMoreElements()) {
                         CustomEventListener l = (CustomEventListener) e.nextElement();
-                        l.onFinish(event);
+                        l.onError(event);
                     }
                     return false;
                 }
@@ -206,41 +210,7 @@ public class ThreadDownloadChunk extends Thread {
         return true;
     }
 
-    private void sendPacket() {
-        int timeOut = 500;
-        try {
-            int flag = 1;
-            do {
-                socket.setSoTimeout(timeOut);
-                socket.send(sendPacket);
-                int n = 1;
-                while (n < 5) {
-                    try {
-                        rcvPacket = new DatagramPacket(buffer, buffer.length);
-                        socket.receive(rcvPacket);
-                        timeOut -= 100;
-                        flag = 6;
-                        break;
-                    } catch (SocketTimeoutException e) {
-                        timeOut += 100;
-                        socket.setSoTimeout(timeOut);
-                        n++;
-                        continue;
-                    }
-                }
-                timeOut += 200;
-                flag++;
-            } while (flag < 5);
-            if (flag == 5) {
-                socket.close();
-                //this.stop();
-            }
-        } catch (Exception ex) {
-            socket.close();
-            //this.stop();
-        }
-    }
-
+    
     public void run() {
         startDownload();
     }

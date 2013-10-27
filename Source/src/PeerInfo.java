@@ -134,25 +134,6 @@ public class PeerInfo {
         this.port = port;
     }
     
-
-    /**
-     * @return the lspeer
-     *
-    public PeerInfo getPeerItem(int index) {
-        return listPeer.get(index);
-    }
-
-    public int countListPeer() {
-        return listPeer.size();
-    }
-
-    /**
-     * @param lspeer the lspeer to set
-     *
-    public void addPeer(PeerInfo peer) {
-        listPeer.add(peer);
-    }
-
     /**
      * @return the status
      */
