@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Enumeration;
 import java.util.EventListener;
 import java.util.Scanner;
@@ -307,6 +308,29 @@ public class ThongTinTapTin {
         return result;
     }
 
+    public static String generateHashCode(byte[] object)
+    {
+        String hexStr = "";
+        MessageDigest md;
+        try {
+            md = MessageDigest.getInstance("SHA1");
+            
+            md.reset();
+            byte[] buffer = "duong dieu phap".getBytes();
+            md.update(buffer);
+            byte[] digest = md.digest();
+
+            
+            for (int i = 0; i < digest.length; i++) {
+                hexStr +=  Integer.toString( ( digest[i] & 0xff ) + 0x100, 16).substring( 1 );
+            }
+            
+        } catch (NoSuchAlgorithmException ex) {
+        }
+        
+        return hexStr;
+    }
+    
     /**
      * Đăng ký sự kiện
      */

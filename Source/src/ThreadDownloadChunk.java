@@ -72,7 +72,7 @@ public class ThreadDownloadChunk extends Thread {
 
                     //Phát sinh sự kiện FINISH
                     e = targets.elements();
-                    event._errorMessage = "Chunk '" + tenChunk + ".chunk': khong tim thay";
+                    event._errorMessage = "Chunk '" + tenChunk + ".chunk': không tìm thấy";
                     while (e.hasMoreElements()) {
                         CustomEventListener l = (CustomEventListener) e.nextElement();
                         l.onError(event);
@@ -95,7 +95,6 @@ public class ThreadDownloadChunk extends Thread {
                     }
                 }
                 ////////////////////////////////////////////
-
 
                 try {
 
@@ -152,10 +151,6 @@ public class ThreadDownloadChunk extends Thread {
                             l.onOccur(event);
                         }
 
-                        if(n == 538)
-                        {
-                            n = 538;
-                        }
 
                         //Chen 52 bytes header vao goi tin 
                         //4 bytes PKG LENGTH
@@ -182,9 +177,13 @@ public class ThreadDownloadChunk extends Thread {
                         //Lay kich thuoc goi tin
                         int numbyte = kichThuocGoiTin - soByteHeader;
                         
+                        byte[] hashData = new byte[numbyte];
+                        System.arraycopy(rcvPacket.getData(), soByteHeader, hashData, 0, hashData.length);
+                        
                         LogFile.Write("Kiem tra lan nhan #" + n + ": "
                                 + "pkgSize = " + kichThuocGoiTin + ", "
-                                + "SHA-1 = " + maHash + ", "
+                                + "Checksum = " + maHash + ", "
+                                + "SHA1 = " + ThongTinTapTin.generateHashCode(hashData) + ", "
                                 + "SEQ = " + seqNumber + ", "
                                 + "ACK = " + ackNumber);
 
@@ -238,7 +237,6 @@ public class ThreadDownloadChunk extends Thread {
             }
 
         } catch (Exception e) {
-            LogFile.Write("");
         }
         return true;
     }

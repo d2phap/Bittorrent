@@ -40,8 +40,6 @@ public class ThreadSendChunk extends Thread {
 
             ThongTinTapTin file = new ThongTinTapTin();
             file.setTenfile(fileName);
-            String hash = file.getHashCode(ThongTinChunk.duongDanChunk + file.getTenfile()
-                    + "/" + file.getTenfile() + "_" + 27 + ".chunk");
 
             //Doc file chunk thanh mang bytes[]
             byte[] data = file.readchunk(countChunk); // chứa 512kb đầy đủ
@@ -50,8 +48,12 @@ public class ThreadSendChunk extends Thread {
             byte[] b; //mang data se gui di
             int n = 0; //Vi tri cua data da gui
             
+            //Tinh kich thuoc header = 52 bytes
+            int soByteHeader = 52;
+
             //So byte cua chunk duoc gui
-            int soByteGui = 1024 - 52;
+            int soByteGui = 1024 - soByteHeader;
+            
 
             //Thực hiện gửi dữ liệu
             //Cho đến khi hết dữ liệu
@@ -69,21 +71,27 @@ public class ThreadSendChunk extends Thread {
                 }
                 
                 
+                //Them 972 byte file chunk vao goi du lieu
+                for (int i = soByteHeader; i < b.length; i++) {
+                    b[i] = data[i + (n * soByteGui) - soByteHeader];
+                }
+                
+                byte[] hashData = new byte[b.length - soByteHeader];
+                System.arraycopy(b, soByteHeader, hashData, 0, hashData.length);
+                
                 //Chen 52 bytes header vao goi tin 
                 //4 bytes PKG LENGTH
                 byte[] pkgLength = ByteBuffer.allocate(4).putInt(b.length).array();
 
                 //40 bytes CHECKSUM
-                byte[] checksum = hash.getBytes();
-
+                byte[] checksum = ThongTinTapTin.generateHashCode(hashData).getBytes();
+                
                 //4 bytes SEQ: Vi tri byte dau tien
                 byte[] seq = ByteBuffer.allocate(4).putInt(n * soByteGui).array();
 
                 //4 bytes ACK: Vi tri byte cuoi cung da nhan, = -1 neu chua nhan
                 byte[] ack = ByteBuffer.allocate(4).putInt((n * soByteGui) - 1).array();
 
-                //Tinh kich thuoc header = 52 bytes
-                int soByteHeader = pkgLength.length + checksum.length + seq.length + ack.length;
                 
                 //Them header vao goi tin
                 System.arraycopy(pkgLength, 0, b, 0, pkgLength.length);
@@ -92,18 +100,13 @@ public class ThreadSendChunk extends Thread {
                 System.arraycopy(ack, 0, b, pkgLength.length + checksum.length + seq.length, ack.length);
                 
 
-                //Them 972 byte file chunk vao goi du lieu
-                for (int i = soByteHeader; i < b.length; i++) {
-                    b[i] = data[i + (n * soByteGui) - soByteHeader];
-                }
-
                 n++;
 
                 //Đóng gói dữ liệu
                 sendPacket = new DatagramPacket(b, b.length, rcvPacket.getAddress(), rcvPacket.getPort());
                 socket.send(sendPacket); // gui 1024 bytes
                 LogFile.Write("Lan gui #" + n + ": " + b.length
-                        + " bytes, dia chi = " + rcvPacket.getAddress()
+                        + " bytes, IP = " + rcvPacket.getAddress()
                         + ", port = " + rcvPacket.getPort());
 
                 //Nhận dữ liệu phản hồi
@@ -112,12 +115,11 @@ public class ThreadSendChunk extends Thread {
             //Gửi tín hiệu kết thúc
             sendPacket = new DatagramPacket("END".getBytes(), "END".getBytes().length, rcvPacket.getAddress(), rcvPacket.getPort());
             socket.send(sendPacket);
-            LogFile.Write("Lan gui END" + ": "
-                    + "dia chi = " + rcvPacket.getAddress()
+            LogFile.Write("Lan gui #END" + ": "
+                    + " IP = " + rcvPacket.getAddress()
                     + ", port = " + rcvPacket.getPort());
 
         } catch (Exception e) {
-            LogFile.Write("");
         }
 
         return true;
