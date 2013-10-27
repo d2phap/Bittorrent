@@ -57,7 +57,7 @@ public class LogFile {
         thoigian += text + "\r\n";
         
         //Them vao log
-        Bittorent.logString += thoigian;
+        Bittorrent.logString += thoigian;
     }
     
     /**

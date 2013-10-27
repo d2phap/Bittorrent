@@ -57,10 +57,10 @@ public class ThreadDownloadChunk extends Thread {
                 List<Integer> dsPeer = new ArrayList<>();
 
                 //Kiem tra chunk dang down o peer nao
-                for (int i = 0; i < Bittorent.danhSachPeer.size(); i++) {
+                for (int i = 0; i < Bittorrent.danhSachPeer.size(); i++) {
 
                     //Neu chunk nam trong peer(i)
-                    if (Bittorent.danhSachPeer.get(i).getDanhSachChunk().indexOf(thuTuChunk) != -1) {
+                    if (Bittorrent.danhSachPeer.get(i).getDanhSachChunk().indexOf(thuTuChunk) != -1) {
                         //Peer(i) chua chunk
                         dsPeer.add(i);
                     }
@@ -89,8 +89,8 @@ public class ThreadDownloadChunk extends Thread {
                 for (int i = 1; i < dsPeer.size(); i++) {
                     int vPeer_soChunk = dsPeer.get(i);
 
-                    if (Bittorent.danhSachPeer.get(minPeer_soChunks).getDanhSachChunkDangDown().size()
-                            > Bittorent.danhSachPeer.get(vPeer_soChunk).getDanhSachChunkDangDown().size()) {
+                    if (Bittorrent.danhSachPeer.get(minPeer_soChunks).getDanhSachChunkDangDown().size()
+                            > Bittorrent.danhSachPeer.get(vPeer_soChunk).getDanhSachChunkDangDown().size()) {
                         minPeer_soChunks = vPeer_soChunk;
                     }
                 }
@@ -98,7 +98,7 @@ public class ThreadDownloadChunk extends Thread {
 
                 try {
 
-                    String _ip = Bittorent.danhSachPeer.get(minPeer_soChunks).getIpAddresss().toString();
+                    String _ip = Bittorrent.danhSachPeer.get(minPeer_soChunks).getIpAddresss().toString();
                     int soByteHeader = 52;
 
                     buffer = new byte[1024];
@@ -107,7 +107,7 @@ public class ThreadDownloadChunk extends Thread {
                     socket.setSoTimeout(5000);
 
                     sendPacket = new DatagramPacket("Down_File".getBytes(), "Down_File".getBytes().length,
-                            Bittorent.danhSachPeer.get(minPeer_soChunks).getIpAddresss(), Bittorent.portlisten);
+                            Bittorrent.danhSachPeer.get(minPeer_soChunks).getIpAddresss(), Bittorrent.portlisten);
 
                     socket.send(sendPacket); //gui Yêu Cầu down_file 
                     LogFile.Write("Gui yeu cau Down_File toi IP: " + _ip);

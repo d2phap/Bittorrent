@@ -130,7 +130,7 @@ public class ThreadDownloadTorrent extends Thread implements EventListener {
             
             //Gui broadcast tim kiem vi tri chunk
             ThreadSendRequest gui = new ThreadSendRequest();
-            gui.peer = Bittorent.peer;
+            gui.peer = Bittorrent.peer;
             gui.func = ThreadSendRequest.TenPhuongThuc.kiemTraFileChunk;
             gui.tenFile = ten;
             gui.soChunk = sochunk;

@@ -74,7 +74,7 @@ public class frmLog extends javax.swing.JFrame {
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
         // TODO add your handling code here:
-        this.logText = Bittorent.logString;
+        this.logText = Bittorrent.logString;
         txtLog.setText(this.logText);
     }//GEN-LAST:event_btnRefreshActionPerformed
 

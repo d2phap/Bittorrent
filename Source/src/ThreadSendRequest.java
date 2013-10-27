@@ -51,14 +51,14 @@ public class ThreadSendRequest extends Thread {
     public void gui() {
         try {
 
-            socket = new DatagramSocket(Bittorent.portlisten + port);
+            socket = new DatagramSocket(Bittorrent.portlisten + port);
             socket.setSoTimeout(3000);
 
-            for (int i = 0; i < Bittorent.danhSachPeer.size(); i++) {
+            for (int i = 0; i < Bittorrent.danhSachPeer.size(); i++) {
                 
-                String dc = Bittorent.danhSachPeer.get(i).getIpAddresss().getHostAddress();
+                String dc = Bittorrent.danhSachPeer.get(i).getIpAddresss().getHostAddress();
                 sendPacket = new DatagramPacket("ONL".getBytes(), "ONL".getBytes().length, 
-                        Bittorent.danhSachPeer.get(i).getIpAddresss(), Bittorent.portlisten);
+                        Bittorrent.danhSachPeer.get(i).getIpAddresss(), Bittorrent.portlisten);
                 
                 try {
                     socket.send(sendPacket);
@@ -69,13 +69,13 @@ public class ThreadSendRequest extends Thread {
                     String gt = new String(rcvPacket.getData(), 0, rcvPacket.getLength());
                     
                     if (gt != null) {
-                        Bittorent.danhSachPeer.get(i).setStatus(true);
-                        LogFile.Write(Bittorent.danhSachPeer.get(i).getIpAddresss() + " ONLINE");
+                        Bittorrent.danhSachPeer.get(i).setStatus(true);
+                        LogFile.Write(Bittorrent.danhSachPeer.get(i).getIpAddresss() + " ONLINE");
                     }
                     
                 } catch (IOException ex) {
 
-                    LogFile.Write(Bittorent.danhSachPeer.get(i).getIpAddresss() + " OFFLINE");
+                    LogFile.Write(Bittorrent.danhSachPeer.get(i).getIpAddresss() + " OFFLINE");
                 }
             }
             
@@ -89,15 +89,15 @@ public class ThreadSendRequest extends Thread {
     public void kiemTraFileChunk(String tenFile, int soLuongChunkToiDa) {
         try {
 
-            socket = new DatagramSocket(Bittorent.portlisten + port);
+            socket = new DatagramSocket(Bittorrent.portlisten + port);
             socket.setSoTimeout(3000);
 
-            for (int i = 0; i < Bittorent.danhSachPeer.size(); i++) {
+            for (int i = 0; i < Bittorrent.danhSachPeer.size(); i++) {
                 
                 String duLieuGui = "GET_CHUNK=>" + tenFile + "=>" + soLuongChunkToiDa;
-                String dc = Bittorent.danhSachPeer.get(i).getIpAddresss().getHostAddress();
+                String dc = Bittorrent.danhSachPeer.get(i).getIpAddresss().getHostAddress();
                 sendPacket = new DatagramPacket(duLieuGui.getBytes(), duLieuGui.getBytes().length, 
-                        Bittorent.danhSachPeer.get(i).getIpAddresss(), Bittorent.portlisten);
+                        Bittorrent.danhSachPeer.get(i).getIpAddresss(), Bittorrent.portlisten);
                 
                 try {
                     socket.send(sendPacket);
@@ -114,7 +114,7 @@ public class ThreadSendRequest extends Thread {
                     LogFile.Write("Nhan vi tri file chunks: " + gt);
                     
                     if (gt != null) {
-                        Bittorent.danhSachPeer.get(i).setStatus(true);
+                        Bittorrent.danhSachPeer.get(i).setStatus(true);
                         
                         //Lay dia chi IP
                         String _ip = gt.split("=>")[0];
@@ -136,12 +136,12 @@ public class ThreadSendRequest extends Thread {
                         }
                         
                         //Cap nhat danh sach chunk cho peer
-                        for (int j = 0; j < Bittorent.danhSachPeer.size(); j++) 
+                        for (int j = 0; j < Bittorrent.danhSachPeer.size(); j++) 
                         {
-                            String peerIP = Bittorent.danhSachPeer.get(j).getIpAddresss().getHostAddress();
+                            String peerIP = Bittorrent.danhSachPeer.get(j).getIpAddresss().getHostAddress();
                             if(_ip.contains(peerIP))
                             {
-                                Bittorent.danhSachPeer.get(j).setDanhSachChunk(dsChunk);
+                                Bittorrent.danhSachPeer.get(j).setDanhSachChunk(dsChunk);
                                 break;
                             }
                         }
